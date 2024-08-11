@@ -2,11 +2,63 @@ server:
   port: 9000
 
 spring:
+  profiles:
+    active: local
+---
+spring:
+  config:
+    activate:
+      on-profile: local
+
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+  datasource:
+    url: jdbc:h2:mem:BankDbLocal
+    username: sa
+    password: sa
+
+  sql:
+    init:
+      data-locations: classpath:data-local.sql
+      mode: always
+
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    url: jdbc:postgresql://ep-small-dew-a2ocpyq8.eu-central-1.aws.neon.tech/BankDb
+    username: BankDb_owner
+    password: 8OkYEzPl3UQf
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+---
+spring:
+  config:
+    activate:
+      on-profile: QA
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/BankInfoHolder
+    username: postgres
+    password: bank321
+
   jpa:
     generate-ddl: true
     show-sql: true
-
-  datasource:
-    url: jdbc:postgresql://localhost:5432/fs8
-    username: postgres
-    password: pg123456

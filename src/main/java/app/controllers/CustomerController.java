@@ -32,9 +32,9 @@ public class CustomerController {
         customerService.saveCustomer(customer);
     }
 
-    @PutMapping
-    public void changeCustomer(@RequestBody Customer customer) {
-        customerService.changeCustomer(customer);
+    @PutMapping("{id}") //After change on token
+    public void changeCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+        customerService.changeCustomer(id, customer);
     }
 
     @DeleteMapping("{id}")
