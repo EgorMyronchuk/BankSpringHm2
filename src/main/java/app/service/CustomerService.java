@@ -38,7 +38,7 @@ public class CustomerService {
 
     public void saveCustomer(Customer customer) {
         customerRepository.save(customer);
-        System.out.println(customerRepository.findAll());
+       // System.out.println(customerRepository.findAll());
     }
 
     public void changeCustomer(Long id, Customer customer) {

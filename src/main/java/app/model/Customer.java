@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Customer extends AbstractEntity {
     private Integer age;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Account> accounts = new ArrayList<>();
 
     @ManyToMany
@@ -29,6 +31,5 @@ public class Customer extends AbstractEntity {
             inverseJoinColumns = @JoinColumn(name = "employer_id")
     )
     private List<Employer> employers = new ArrayList<>();
-
 
 }

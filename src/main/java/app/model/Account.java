@@ -1,5 +1,6 @@
 package app.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.stereotype.Component;
@@ -24,11 +25,21 @@ public class Account extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonBackReference
     private Customer customer;
 
     public Account(CustomCurrency currency, Customer customer) {
         this.currency = currency;
         this.customer = customer;
         this.balance = 0.0; // Начальный баланс, если требуется
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "number='" + number + '\'' +
+                ", currency=" + currency +
+                ", balance=" + balance +
+                '}';
     }
 }
